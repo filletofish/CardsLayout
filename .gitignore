@@ -1,0 +1,20 @@
+.DS_Store
+
+# Xcode
+CardsExample.xcodeproj/xcuserdata
+CardsExample.xcodeproj/project.xcworkspace/xcuserdata
+
+# Versioning
+BuildTimeInfo.plist
+
+# Build files
+*.bcsymbolmap
+Carthage/Checkouts
+./build
+Build
+Build-command-line/
+**/DerivedData/**
+**/TestingLegacyXML/**
+
+#Custom
+CardsOldSource/**
