@@ -8,23 +8,23 @@
 
 import UIKit
 
-class CardsCollectionViewLayout: UICollectionViewLayout {
+open class CardsCollectionViewLayout: UICollectionViewLayout {
 
   // MARK: - Layout configuration
 
-  var itemSize: CGSize = CGSize(width: 200, height: 300) {
+  public var itemSize: CGSize = CGSize(width: 200, height: 300) {
     didSet{
       invalidateLayout()
     }
   }
 
-  var spacing: CGFloat = 10.0 {
+  public var spacing: CGFloat = 10.0 {
     didSet{
       invalidateLayout()
     }
   }
 
-  var maximumVisibleItems: Int = 4 {
+  public var maximumVisibleItems: Int = 4 {
     didSet{
       invalidateLayout()
     }
@@ -32,22 +32,22 @@ class CardsCollectionViewLayout: UICollectionViewLayout {
 
   // MARK: UICollectionViewLayout
 
-  override var collectionView: UICollectionView {
+  override open var collectionView: UICollectionView {
     return super.collectionView!
   }
 
-  override var collectionViewContentSize: CGSize {
+  override open var collectionViewContentSize: CGSize {
     let itemsCount = CGFloat(collectionView.numberOfItems(inSection: 0))
     return CGSize(width: collectionView.bounds.width * itemsCount,
                   height: collectionView.bounds.height)
   }
 
-  override func prepare() {
+  override open func prepare() {
     super.prepare()
     assert(collectionView.numberOfSections == 1, "Multiple sections aren't supported!")
   }
 
-  override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+  override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
     let totalItemsCount = collectionView.numberOfItems(inSection: 0)
 
     let minVisibleIndex = max(Int(collectionView.contentOffset.x) / Int(collectionView.bounds.width), 0)
@@ -63,7 +63,7 @@ class CardsCollectionViewLayout: UICollectionViewLayout {
 
     let attributes: [UICollectionViewLayoutAttributes] = visibleIndices.map { index in
       let indexPath = IndexPath(item: index, section: 0)
-      return layoutAttributesForItem(indexPath: indexPath,
+      return computeLayoutAttributesForItem(indexPath: indexPath,
                                      minVisibleIndex: minVisibleIndex,
                                      contentCenterX: contentCenterX,
                                      deltaOffset: CGFloat(deltaOffset),
@@ -73,19 +73,19 @@ class CardsCollectionViewLayout: UICollectionViewLayout {
     return attributes
   }
 
-  override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+  override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
     let contentCenterX = collectionView.contentOffset.x + (collectionView.bounds.width / 2.0)
     let minVisibleIndex = Int(collectionView.contentOffset.x) / Int(collectionView.bounds.width)
     let deltaOffset = Int(collectionView.contentOffset.x) % Int(collectionView.bounds.width)
     let percentageDeltaOffset = CGFloat(deltaOffset) / collectionView.bounds.width
-    return layoutAttributesForItem(indexPath: indexPath,
+    return computeLayoutAttributesForItem(indexPath: indexPath,
                                    minVisibleIndex: minVisibleIndex,
                                    contentCenterX: contentCenterX,
                                    deltaOffset: CGFloat(deltaOffset),
                                    percentageDeltaOffset: percentageDeltaOffset)
   }
 
-  override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+  override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
     return true
   }
 }
@@ -111,7 +111,7 @@ private extension CardsCollectionViewLayout {
     return CGAffineTransform(scaleX: rawScale, y: rawScale)
   }
 
-  private func layoutAttributesForItem(indexPath: IndexPath,
+  private func computeLayoutAttributesForItem(indexPath: IndexPath,
                                        minVisibleIndex: Int,
                                        contentCenterX: CGFloat,
                                        deltaOffset: CGFloat,
