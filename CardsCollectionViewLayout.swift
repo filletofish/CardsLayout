@@ -93,7 +93,7 @@ open class CardsCollectionViewLayout: UICollectionViewLayout {
 
 // MARK: - Layout computations
 
-private extension CardsCollectionViewLayout {
+fileprivate extension CardsCollectionViewLayout {
 
   private func scale(at index: Int) -> CGFloat {
     let translatedCoefficient = CGFloat(index) - CGFloat(self.maximumVisibleItems) / 2
@@ -111,7 +111,7 @@ private extension CardsCollectionViewLayout {
     return CGAffineTransform(scaleX: rawScale, y: rawScale)
   }
 
-  private func computeLayoutAttributesForItem(indexPath: IndexPath,
+  fileprivate func computeLayoutAttributesForItem(indexPath: IndexPath,
                                        minVisibleIndex: Int,
                                        contentCenterX: CGFloat,
                                        deltaOffset: CGFloat,
