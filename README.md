@@ -14,7 +14,7 @@ CardsLayout is a lightweight Collection Layout.
 ## Installation
 
 ### CocoaPods
-You can use [CocoaPods](http://cocoapods.org/) to install `TextFieldCounter` by adding it to your `Podfile`:
+You can use [CocoaPods](http://cocoapods.org/) to install `CardsLayout` by adding it to your `Podfile`:
 
 ```ruby
 platform :ios, '9.0'
