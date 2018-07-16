@@ -59,7 +59,7 @@ open class CardsCollectionViewLayout: UICollectionViewLayout {
 
     let percentageDeltaOffset = CGFloat(deltaOffset) / collectionView.bounds.width
 
-    let visibleIndices = minVisibleIndex..<maxVisibleIndex
+    let visibleIndices = stride(from: minVisibleIndex, to: maxVisibleIndex, by: 1)
 
     let attributes: [UICollectionViewLayoutAttributes] = visibleIndices.map { index in
       let indexPath = IndexPath(item: index, section: 0)
